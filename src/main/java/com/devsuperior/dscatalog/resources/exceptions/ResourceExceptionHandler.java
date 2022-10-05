@@ -50,14 +50,13 @@ public class ResourceExceptionHandler {
 
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Database exception");
+		err.setError("Validation exception");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 
 		for(FieldError error : e.getBindingResult().getFieldErrors()){
 			err.addError(error.getField(), error.getDefaultMessage());
 		}
-
 		return ResponseEntity.status(status).body(err);
 	}
 }
